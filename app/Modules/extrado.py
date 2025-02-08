@@ -9,7 +9,7 @@ import ofxparse
 class Extrato:
 
     def __init__(self):
-        self.path_ofx = r".\entrada\08022025\Extrato conta corrente - 022025.ofx"
+        self.path_ofx = r".\entrada\Extrato-08-01-2025-a-08-02-2025.ofx"
 
 
 
