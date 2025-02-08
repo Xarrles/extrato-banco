@@ -1,0 +1,7 @@
+Passo a passo para Gerar o Executável - 
+
+1º - Abrir o CMD na pasta do Robô
+2º - Ativar o venv
+3º - Usar o CD para ir para pasta App
+4º - Executar o código para gerar o Executável - 
+    python -m PyInstaller --onefile --paths .\venv\Lib\site-packages --icon=icone\one4.ico -n Name-Executavel .\__main__.py

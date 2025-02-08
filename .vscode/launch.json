@@ -1,0 +1,12 @@
+{
+    "version": "1.0.0",
+    "configurations": [
+        {
+            "name": "Execucao em DEV",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}\\app\\__main__.py"
+            //"program": "${workspaceFolder}/scheduller.py"
+        }
+    ]
+}
