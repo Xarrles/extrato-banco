@@ -1,6 +1,6 @@
 venv
 env
-
+entrada/
 output/*.*
 logs/*.*
 __pycache__
