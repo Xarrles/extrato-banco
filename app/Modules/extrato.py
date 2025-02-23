@@ -5,6 +5,7 @@ from Libs.loguru      import logger_class
 import ofxparse
 from Libs.sql import conectar
 from unidecode import unidecode
+from datetime import datetime 
 
 @logger_class()
 class Extrato:
@@ -12,6 +13,7 @@ class Extrato:
     def __init__(self):
         self.path_ofx = r".\entrada\Extrato-08-01-2025-a-08-02-2025.ofx"
 
+        self.dados = [{valor: str, data: str}]
 
 
     def fix_ofx_fitid(self, ofx_file):
@@ -58,22 +60,61 @@ class Extrato:
             print(f"Descrição: {transaction.memo}")
             print(f"FITID: {transaction.id}")
             print("-" * 30)
-            db = conectar()
-            cursor = db.cursor()
-            sql = """
-            INSERT INTO extrato_info (saldo, valor, descricao, tipo, fit_id, mov_data, hora)
-            VALUES (%s, %s, %s, %s, %s, %s, %s)
-            """
 
-            valores = (0, float(transaction.amount), unidecode(transaction.memo), transaction.memo[:1], int(transaction.id[:10]), "rola", "00:00:00"[:6])
-            cursor.execute(sql, valores)
 
-            db.commit()
-        cursor.close()
-        db.close()
+            yield transaction
+
+
+    def get_strato(self, transaction):
+            '''
+            Funcao responsavel por descobrir o saldo no momento combase nas transacoes anteriores
+
+            # Dica
+
+            Criar uma variavel global que ira armazenas os saldo com as datas
+
+
+            Retunr -  soldo
+            '''
+            saldo == None
+
+            return saldo
+
+    
+    def insert_db(self, transction, saldo):
+            ...
+                sql = """
+                INSERT INTO extrato_info (saldo, valor, descricao, tipo, fit_id, mov_data, hora)
+                VALUES (%s, %s, %s, %s, %s, %s, %s)
+                """
+
+                valores = (0, float(transaction.amount), unidecode(transaction.memo), transaction.memo[:1], int(transaction.id[:10]), "rola", "00:00:00"[:6])
+                self.cursor.execute(sql, valores)
+
+                self.db.commit()
+            
+
+    def close_db(self):
+        self.cursor.close()
+        self.db.close()
+
+    def open_db(self):
+        self.db = conectar()
+        self.cursor = db.cursor()
+
+
+        
         pass
     def main(self):
         logger.info("\t1.1 -  Extraindo informações do extrato")
-        self.extrair()\
+        self.open_db()
+        for transacao in self.extrair():
+             saldo = self.get_strato(transaction=transacao)
+             self.insert_db(transction=transacao, saldo=saldo)
+
+
+        self.close_db()
+        cursor.close()
+        db.close()
         
         ...
