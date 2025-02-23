@@ -1,7 +1,7 @@
 from Config             import *
 from Config             import logger, show_config
 from Libs.loguru        import logger_start
-from Modules.extrado    import Extrato
+from Modules.extrato    import Extrato
 
 @logger_start
 def main():
